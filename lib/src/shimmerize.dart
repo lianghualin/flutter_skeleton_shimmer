@@ -78,8 +78,7 @@ class _ShimmerizeState extends State<Shimmerize>
     final autoRects = RenderTreeWalker.collectLeafRects(renderObject);
 
     final boneRects = <LeafRect>[];
-    final ancestorRenderObject =
-        _childKey.currentContext!.findRenderObject()! as RenderBox;
+    final ancestorRenderObject = renderObject as RenderBox;
     final ancestorOffset = ancestorRenderObject.localToGlobal(Offset.zero);
 
     for (final bone in _bones.values) {

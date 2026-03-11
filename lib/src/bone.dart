@@ -48,6 +48,20 @@ class _BoneState extends State<Bone> {
   }
 
   @override
+  void didUpdateWidget(Bone oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_scope != null && _scope!.enabled &&
+        (widget.borderRadius != oldWidget.borderRadius ||
+         widget.isCircle != oldWidget.isCircle)) {
+      _scope!.register(BoneRect(
+        key: _boneKey,
+        borderRadius: widget.borderRadius,
+        isCircle: widget.isCircle,
+      ));
+    }
+  }
+
+  @override
   void deactivate() {
     _scope?.unregister(_boneKey);
     super.deactivate();

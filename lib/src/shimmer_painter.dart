@@ -54,6 +54,7 @@ class ShimmerPainter extends CustomPainter {
     return animationValue != oldDelegate.animationValue ||
         rects.length != oldDelegate.rects.length ||
         baseColor != oldDelegate.baseColor ||
-        highlightColor != oldDelegate.highlightColor;
+        highlightColor != oldDelegate.highlightColor ||
+        borderRadius != oldDelegate.borderRadius;
   }
 }
