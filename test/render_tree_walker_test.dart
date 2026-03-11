@@ -1,6 +1,5 @@
 // ignore_for_file: implementation_imports
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_skeleton_shimmer/src/render_tree_walker.dart';
 
