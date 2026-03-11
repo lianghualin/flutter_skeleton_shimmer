@@ -1,0 +1,14 @@
+name: flutter_skeleton_shimmer_example
+description: Demo of flutter_skeleton_shimmer package.
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_skeleton_shimmer:
+    path: ../
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
