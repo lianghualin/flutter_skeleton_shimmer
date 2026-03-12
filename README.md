@@ -2,6 +2,8 @@
 
 A hybrid shimmer skeleton loading widget for Flutter. Wrap any widget tree with `Shimmerize` to automatically replace `Text`, `Icon`, `Image`, and `CircleAvatar` widgets with animated shimmer bones — no manual skeleton layout needed. For full control, drop in explicit `Bone()` markers.
 
+![Shimmer Playground Demo](https://raw.githubusercontent.com/lianghualin/flutter_skeleton_shimmer/main/example.gif)
+
 ## Features
 
 - Auto-detects `Text`, `RichText`, `Icon`, `Image`, and `CircleAvatar` widgets and replaces them with shimmering skeleton bones
@@ -16,7 +18,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_skeleton_shimmer: ^0.1.0
+  flutter_skeleton_shimmer: ^0.1.1
 ```
 
 Then run:
@@ -170,8 +172,6 @@ A full **Shimmer Playground** app is available in the [`example/`](example/) dir
 - **6 real-world scenarios** — Social Feed, User Profile, Product Cards, Chat, Settings List, Article
 - **Interactive Sandbox** — tweak shimmer colors, speed, and border radius in real time
 - **Drawer navigation** to browse all demos
-
-![Shimmer Playground Demo](https://raw.githubusercontent.com/lianghualin/flutter_skeleton_shimmer/main/example.gif)
 
 ```bash
 cd example

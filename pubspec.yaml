@@ -1,6 +1,6 @@
 name: flutter_skeleton_shimmer
 description: A hybrid shimmer skeleton loading widget for Flutter. Auto-detects Text, Icon, Image widgets and supports explicit Bone() markers.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/lianghualin/flutter_skeleton_shimmer
 repository: https://github.com/lianghualin/flutter_skeleton_shimmer
 issue_tracker: https://github.com/lianghualin/flutter_skeleton_shimmer/issues
