@@ -67,16 +67,11 @@ class SocialFeedPage extends StatelessWidget {
               const SizedBox(height: 12),
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  'assets/placeholder.png',
+                child: Container(
                   height: 180,
                   width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    height: 180,
-                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                    child: const Center(child: Icon(Icons.image, size: 48)),
-                  ),
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  child: const Center(child: Icon(Icons.image, size: 48)),
                 ),
               ),
             ],

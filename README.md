@@ -165,7 +165,13 @@ The following widget types are automatically replaced with shimmer bones when `S
 
 ## Example
 
-A full runnable example is available in the [`example/`](example/) directory.
+A full **Shimmer Playground** app is available in the [`example/`](example/) directory, featuring:
+
+- **6 real-world scenarios** — Social Feed, User Profile, Product Cards, Chat, Settings List, Article
+- **Interactive Sandbox** — tweak shimmer colors, speed, and border radius in real time
+- **Drawer navigation** to browse all demos
+
+![Shimmer Playground Demo](https://raw.githubusercontent.com/lianghualin/flutter_skeleton_shimmer/main/example.gif)
 
 ```bash
 cd example
