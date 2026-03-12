@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_skeleton_shimmer/flutter_skeleton_shimmer.dart';
+import 'widgets/playground_drawer.dart';
+import 'pages/social_feed_page.dart';
+import 'pages/user_profile_page.dart';
+import 'pages/product_cards_page.dart';
+import 'pages/chat_page.dart';
+import 'pages/settings_list_page.dart';
+import 'pages/article_page.dart';
+import 'pages/sandbox_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -9,123 +16,90 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Shimmerize Demo',
-      theme: ThemeData(colorSchemeSeed: Colors.blue, useMaterial3: true),
-      home: const DemoPage(),
+      title: 'Shimmer Playground',
+      theme: ThemeData(
+        colorSchemeSeed: Colors.deepPurple,
+        useMaterial3: true,
+      ),
+      home: const PlaygroundShell(),
     );
   }
 }
 
-class DemoPage extends StatefulWidget {
-  const DemoPage({super.key});
+class PlaygroundShell extends StatefulWidget {
+  const PlaygroundShell({super.key});
 
   @override
-  State<DemoPage> createState() => _DemoPageState();
+  State<PlaygroundShell> createState() => _PlaygroundShellState();
 }
 
-class _DemoPageState extends State<DemoPage> {
+class _PlaygroundShellState extends State<PlaygroundShell> {
+  PlaygroundPage _currentPage = PlaygroundPage.socialFeed;
   bool _isLoading = true;
+
+  String get _title {
+    switch (_currentPage) {
+      case PlaygroundPage.socialFeed:
+        return 'Social Feed';
+      case PlaygroundPage.userProfile:
+        return 'User Profile';
+      case PlaygroundPage.productCards:
+        return 'Product Cards';
+      case PlaygroundPage.chat:
+        return 'Chat';
+      case PlaygroundPage.settingsList:
+        return 'Settings List';
+      case PlaygroundPage.article:
+        return 'Article';
+      case PlaygroundPage.sandbox:
+        return 'Sandbox';
+    }
+  }
+
+  Widget _buildPage() {
+    switch (_currentPage) {
+      case PlaygroundPage.socialFeed:
+        return SocialFeedPage(isLoading: _isLoading);
+      case PlaygroundPage.userProfile:
+        return UserProfilePage(isLoading: _isLoading);
+      case PlaygroundPage.productCards:
+        return ProductCardsPage(isLoading: _isLoading);
+      case PlaygroundPage.chat:
+        return ChatPage(isLoading: _isLoading);
+      case PlaygroundPage.settingsList:
+        return SettingsListPage(isLoading: _isLoading);
+      case PlaygroundPage.article:
+        return ArticlePage(isLoading: _isLoading);
+      case PlaygroundPage.sandbox:
+        return const SandboxPage();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final isSandbox = _currentPage == PlaygroundPage.sandbox;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shimmerize Demo'),
+        title: Text(_title),
         actions: [
-          Switch(
-            value: _isLoading,
-            onChanged: (v) => setState(() => _isLoading = v),
-          ),
-          const SizedBox(width: 8),
+          if (!isSandbox) ...[
+            const Text('Loading'),
+            Switch(
+              value: _isLoading,
+              onChanged: (v) => setState(() => _isLoading = v),
+            ),
+            const SizedBox(width: 8),
+          ],
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Auto-detect demo
-            Text('Auto-detect (Text, Icon)',
-                style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 8),
-            Shimmerize(
-              enabled: _isLoading,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    children: [
-                      const CircleAvatar(child: Icon(Icons.person)),
-                      const SizedBox(width: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('John Doe',
-                              style: Theme.of(context).textTheme.titleMedium),
-                          const Text('john.doe@example.com'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-
-            // Bone marker demo
-            Text('Bone markers (explicit)',
-                style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 8),
-            Shimmerize(
-              enabled: _isLoading,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Bone.circle(size: 48),
-                          const SizedBox(width: 16),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Bone(width: 150, height: 16),
-                              const SizedBox(height: 8),
-                              Bone(width: 100, height: 12),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      const Bone(width: double.infinity, height: 120),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-
-            // List demo
-            Text('List items',
-                style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 8),
-            ...List.generate(
-              4,
-              (i) => Shimmerize(
-                enabled: _isLoading,
-                child: ListTile(
-                  leading: const CircleAvatar(child: Icon(Icons.device_hub)),
-                  title: Text('Device ${i + 1}'),
-                  subtitle: const Text('192.168.1.x'),
-                  trailing: const Icon(Icons.chevron_right),
-                ),
-              ),
-            ),
-          ],
-        ),
+      drawer: PlaygroundDrawer(
+        currentPage: _currentPage,
+        onPageSelected: (page) => setState(() {
+          _currentPage = page;
+          _isLoading = true;
+        }),
       ),
+      body: _buildPage(),
     );
   }
 }
